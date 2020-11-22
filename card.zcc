@@ -1,0 +1,62 @@
+[BasicCard]
+ConfigFile=Pro\ZC54_M.zcf
+
+[Card Reader]
+PhysicalReader=100
+VirtualReader=201
+
+[Compiler]
+ImageFile=true
+ListingFile=false
+MapFile=false
+SourceFile=Card.BAS
+
+[Counters Window]
+Block0=&quote;=my,fAB7L,_nUUs!+V{~U:B[cV&lt;bfEUyy&quote;YX&apos;{LM~BcZpNu8-s[,5;=
+CRC=0x8889687f
+Hex=false
+Length=46
+Visible=true
+
+[EEPROM]
+Block0=B^!(Y8PPBM@kNdk5rnJ8O+)9zNp0hTqB#30g{u&gt;6zuh;3Tw@.vf)SbOS&lt;hv)/;pxTR/}2=e
+Block1=0v&apos;|y!Z@H&lt;92*BuhlC|cINz-Z:7z,$6t/SX/%p%Yi;w[LkbeG/-;Kzz#^Wf=xFpmmTA:.W&amp;
+Block2=9?^m1_]&quote;xI%&gt;`f^W&lt;J&lt;lKO:&amp;H9?Y^VO{x@qZ([PPRKleF1I.&apos;|kE&quote;Yj3]{pB|v,\8:RJZV+
+Block3=*&amp;\-,oI%LSp92sm&lt;2p\7gt~a3lK#H;6#OChw{0)!._!L~r#|\2osH6:dtEt6UpP:g&amp;yP!V
+CRC=0xed172f0b
+Length=231
+MaskCRC=3391360738
+StartCRC=1158808244
+
+[Files Window]
+Block0=&quote;=my,fAB7L,_jjgu_+=LR*|&quote;L9:PS4]U6Og+$)Bp2G97rgrVDtb#jo:C
+CRC=0x7ca99f0b
+Length=46
+Visible=false
+
+[FreeMem Window]
+Block0=&quote;=my,fAB7L,_jjgu_+=LR*{`;J;ng1.|J&gt;a=00}.rPbME^Sh&amp;a}P`G_M
+CRC=0x0776ef12
+Hex=false
+Length=46
+Visible=false
+
+[Window Geometry]
+Block0=&quote;=my,fAB7L,_mz+N6lKK8&quote;1IU4^mfaO|Cg&amp;g51O!x]+8l~,q2Soe(!b{
+CRC=0x28b14a2c
+Length=46
+
+[Window Options]
+IOToolTipEnabled=true
+ShowRegisters=Auto
+
+[Window State]
+Block0=&quote;juy(J&amp;&amp;NwRR3wW/;svz\JV]*3.uofZpTGom&lt;LO&quote;Vmt#@v8Tv46P-R|%x&apos;14i&gt;&lt;b?qVo
+Block1=DQ@J&gt;fF=OZgn/zNwEbn_j=XW[V:e-|pd6pZ,rM#gq&amp;(fLRPoLY}~~4ML/n.7iNK&lt;Q)A@;v{
+Block2=l&gt;r(#\}&gt;GWa,7p7L;&quote;=$@B&apos;@]e71-*m/Z}j_v:q~|NPly4m3N=vRWdGc1qA17d`ez%-!
+Block3=.=5&quote;6PM%6;~]mE5k7%$9v^sw|Y:)bY4|?A&apos;r_=M7W`(+_&amp;W7w=;^bViOBIxhY{v,bip|PK
+Block4=%eIN\&apos;NY-_]P?Z(2yiqG[yE?rp5%yHbQmjp,|{z-)vJrbfbb;t&quote;fHEX.|`^M2qWrq8oU11
+Block5=-}v\{N?7z#@O8`kd(5:Vy)!{i1&amp;Lp-L(QI7AX#@6c8Qg|(Ne\p|!r~F4\C}:1z1L&quote;O])v*
+Block6=!
+CRC=0x3cd67585
+Length=356

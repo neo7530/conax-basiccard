@@ -1,0 +1,74 @@
+'
+'Cerebro Card ATR Restorer v1
+'By 007.4
+'
+'This can be used to restore the ATR of a Cerebro card that just shows "3B" or no ATR.
+'Run the script and at the same time rapidly pull and replace the card from the reader
+'until you see a response such as "3B......".
+'Then press the "Analyse ATR" button to see the ATR.
+Option Explicit
+
+call Settings()
+
+Sub Main()
+'call SendAppT1() ' Protocol T=1
+call SendAppT0()   ' Protocol T=0
+End Sub
+
+Function SendAppT1()
+sc.reset
+sc.delay(1000)
+sc.write("FF 01 FE")
+sc.read(3)
+sc.delay(1000)
+
+sc.write("00 00 05 C0 00 00 00 00 c5")
+sc.delay(1000)
+sc.read(&h0c+6)
+
+sc.write("00 40 04 C0 0C 01 00 89")
+sc.delay(1000)
+sc.read(6)
+
+sc.reset
+
+End Function
+
+Function SendAppT0()
+sc.reset
+sc.delay(1000)
+
+sc.write("C0 00 00 00 0c")
+sc.delay(1000)
+sc.read(&h0c+3)
+
+sc.write("C0 0C 01 00 00")
+sc.delay(1000)
+sc.read(2)
+
+sc.reset
+sc.delay(1000)
+
+End Function
+
+Sub Settings()
+    Wx.BaudRate = 9600
+    Wx.ResetBaudRate = 9600
+    Wx.Parity = 2                    ' 0 = None, 1 = Odd, 2 = Even, 3 = Mark, 4 = Space
+    Wx.StopBits = 2                  ' 0 = 1 stop bit, 1 = 1.5 stop bits, 2 = 2 stop bits
+    Wx.DTRControl = 1                ' Initial state of DTR  0 = off, 1 = on
+    Wx.RTSControl = 0                ' Initial state of RTS  0 = off, 1 = on
+    Wx.ResetDelay = 1000             ' In microseconds
+    Wx.ByteDelay = 500              ' In microseconds
+    Wx.RxByteTimeout = 20           ' In milliseconds
+    Wx.ResetMode = 1                 ' 0 = No Resets, 1 = ISO Reset (Expect a ATR), 2 = Device Reset (No ATR)
+    Wx.ResetLine = 0                 ' 0 = Toggle RTS for Reset, 1 = Toggle DTR for Reset
+    Wx.ByteConvention = 1            ' 0 = Inverse, 1 = Direct
+    Wx.FlushEchoByte = 1             ' 0 = no flush, 1 = flush - A Phoenix interface will echo each byte transmitted.
+    Wx.FlushBeforeWrite = 1          ' 0 = no flush, 1 = flush - Flush the receive buffer before each write to strip off Null bytes.
+    Wx.IgnoreTimeouts = 1            ' 0 = Abort script on a receive timeout, 1 = Ignore all receive timeouts
+    Wx.ResetAfterTimeout = 0         ' 0 = Don't reset after a timeout, 1 = do a reset after a timeout  - Not used if "IgnoreTimeouts=0"
+    Wx.LogTransactions = 0           ' 0 = Don't log transactions, 1 = log transactions
+    Wx.DisplayUSW = 0                ' Display USW after script complete 0 = no, 1 = yes
+    Wx.DisplayFuse = 0               ' Display Fuse after script complete 0 = no, 1 = yes
+End Sub

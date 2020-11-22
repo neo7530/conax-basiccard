@@ -1,0 +1,139 @@
+#include ./inc/omac.def
+#include ./inc/sha-1.def
+
+function aes_cbc_enc(byref data$ as string,skip as byte)
+private cw0 as string*16
+private iv as string*16
+private i as byte
+private j as byte
+private temp$ as string
+
+for i = 1 to skip
+temp$ = temp$ + data$(i)
+next
+
+    for i = 0 to 2
+      for j = 1 to 16
+         cw0(j) = data$(skip+(i*16+j))
+      next j
+      cw0 = cw0 xor iv
+      cw0 = aes(+128,key(&h20),cw0)
+      iv = cw0
+      temp$ = temp$ + cw0
+    next i
+
+
+data$ = temp$
+
+end function
+
+function aes_cbc_e(byref data$ as string,keyid as byte)
+private cw0 as string*16
+private iv as string*16
+private i as byte
+private j as byte
+private temp$ as string
+
+'for i = 1 to skip
+'temp$ = temp$ + data$(i)
+'next
+
+    for i = 0 to 2
+      for j = 1 to 16
+         cw0(j) = data$(i*16+j)
+      next j
+      cw0 = cw0 xor iv
+      cw0 = aes(+128,key(keyid),cw0)
+      iv = cw0
+      temp$ = temp$ + cw0
+    next i
+
+
+data$ = temp$
+
+end function
+
+
+function aes_cbc_emm(byref data$ as string)
+private cw0 as string*16
+private iv as string*16
+private i as byte
+private j as byte
+private temp$ as string
+
+'for i = 1 to skip
+'temp$ = temp$ + data$(i)
+'next
+
+    for i = 0 to 2
+      for j = 1 to 16
+         cw0(j) = data$(i*16+j)
+      next j
+      cw0 = cw0 xor iv
+      cw0 = aes(+128,key(&h10),cw0)
+      iv = cw0
+      temp$ = temp$ + cw0
+    next i
+
+
+data$ = temp$
+
+end function
+
+function aes_cbc_perso(byref data$ as string)
+private cw0 as string*16
+private iv as string*16
+private i as byte
+private j as byte
+private temp$ as string
+
+'for i = 1 to skip
+'temp$ = temp$ + data$(i)
+'next
+
+    for i = 0 to 2
+      for j = 1 to 16
+         cw0(j) = data$(i*16+j)
+      next j
+      cw0 = cw0 xor iv
+      cw0 = aes(+128,key(&h99),cw0)
+      iv = cw0
+      temp$ = temp$ + cw0
+    next i
+
+
+data$ = temp$
+
+end function
+
+function cardinfo()
+   private data$ as string
+   call sendinfo(chr$(&h69,1,0)) : call respond()
+   call sendinfo(chr$(&h10,1,&h40)) : call respond()
+   call getdata(LC=0,data$,LE=laenge) : Call CheckSW1SW2()
+   Call programminfo(chr$(&h1C,1,0,1)) : Call respond()
+   call getdata(LC=0,data$,LE=laenge) : Call respond() '31
+   call getdata(LC=0,data$,LE=laenge) : Call respond()
+   call get82(lc = &h11,chr$(&h11, &h0F, &h01, &h0B, &h00, &h0F, &hE0, &hFB, &h00, &h00, &h09, &h04, &h0B, &h00, &hE0, &h30, &h2B)) : call respond()
+   call getdata(LC=0,data$,LE=laenge) : Call CheckSW1SW2()
+end function
+
+function persohash()
+dim hashtest as string, mac$ as string
+hashtest = shahash("test")
+
+mac$ = omac(128,hashtest,"test")
+
+call sha("test"+mac$): ResetCard : Call CheckSW1SW2()
+end function
+
+function setmasterkey()
+   private leadin$ as string = chr$(&h12,&h4E,&h82,&h70,&h4B,&h00,&h00,&h00)
+   private data$ as string = chr$(&ha0,&h00,&h12,&h34,&h56,&h78,&ha0,&h22,&h10,&h11,&h12,&h13,&h14,&h15,&h16,&h17,&h18,&h19,&h20,&h21,&h22,&h23,&h24,&h25,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC)
+   key(&h99) = shahash("test")
+   private mac$ as string 
+   mac$ = omac(128,key(&h99),data$)
+   call aes_cbc_e(data$,&h99)
+   data$ = data$ + mac$
+   call emm(leadin$,chr$(&hff,&hff,&hff,&hff),chr$(&h70,&h42,&h64,&h10),data$) : ResetCard : Call CheckSW1SW2()
+end function

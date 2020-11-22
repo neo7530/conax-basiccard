@@ -1,0 +1,80 @@
+Option Explicit
+
+call Settings()
+
+Sub Main()
+call SendAppT0()   ' Protocol T=0
+End Sub
+
+
+Function SendAppT0()
+sc.reset
+sc.delay(1000)
+
+sc.write("F0 00 00 00 06 10 10 04 C4 B4 01")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 00 02 04 10 10 61 0B")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 00 03 04 10 10 7F 0C")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 00 01 06 10 10 00 89 54 40")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 00 05 06 10 10 00 00 00 01")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 00 04 0b 10 10 4E 65 6F 56 69 73 69 6F 6E")
+sc.delay(100)
+sc.read(2)
+
+'sc.write("F0 00 01 80 12 10 10 40 BF E7 46 24 69 60 C5 60 AF 34 32 16 14 13 AD")
+'sc.delay(100)
+'sc.read(2)
+
+sc.write("F0 00 01 20 12 10 10 BB AA 99 88 77 66 55 44 FF EE DD CC 33 22 11 00")
+sc.delay(100)
+sc.read(2)
+
+sc.write("F0 00 01 21 12 10 10 77 66 55 44 BB AA 99 88 33 22 11 00 FF EE DD CC")
+sc.delay(100)
+sc.read(2)
+
+'sc.write("F0 00 01 81 12 10 10 31 F9 D3 52 AB BA 34 BE FB 82 B1 D5 33 4C AC 59")
+'sc.delay(100)
+'sc.read(2)
+
+sc.write("F0 00 01 10 12 10 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF")
+sc.delay(100)
+sc.read(2)
+
+End Function
+
+Sub Settings()
+    Wx.BaudRate = 9600
+    Wx.ResetBaudRate = 9600
+    Wx.Parity = 2                    ' 0 = None, 1 = Odd, 2 = Even, 3 = Mark, 4 = Space
+    Wx.StopBits = 2                  ' 0 = 1 stop bit, 1 = 1.5 stop bits, 2 = 2 stop bits
+    Wx.DTRControl = 1                ' Initial state of DTR  0 = off, 1 = on
+    Wx.RTSControl = 0                ' Initial state of RTS  0 = off, 1 = on
+    Wx.ResetDelay = 1000             ' In microseconds
+    Wx.ByteDelay = 500              ' In microseconds
+    Wx.RxByteTimeout = 20           ' In milliseconds
+    Wx.ResetMode = 1                 ' 0 = No Resets, 1 = ISO Reset (Expect a ATR), 2 = Device Reset (No ATR)
+    Wx.ResetLine = 0                 ' 0 = Toggle RTS for Reset, 1 = Toggle DTR for Reset
+    Wx.ByteConvention = 1            ' 0 = Inverse, 1 = Direct
+    Wx.FlushEchoByte = 1             ' 0 = no flush, 1 = flush - A Phoenix interface will echo each byte transmitted.
+    Wx.FlushBeforeWrite = 1          ' 0 = no flush, 1 = flush - Flush the receive buffer before each write to strip off Null bytes.
+    Wx.IgnoreTimeouts = 1            ' 0 = Abort script on a receive timeout, 1 = Ignore all receive timeouts
+    Wx.ResetAfterTimeout = 0         ' 0 = Don't reset after a timeout, 1 = do a reset after a timeout  - Not used if "IgnoreTimeouts=0"
+    Wx.LogTransactions = 0           ' 0 = Don't log transactions, 1 = log transactions
+    Wx.DisplayUSW = 0                ' Display USW after script complete 0 = no, 1 = yes
+    Wx.DisplayFuse = 0               ' Display Fuse after script complete 0 = no, 1 = yes
+End Sub
