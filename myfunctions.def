@@ -263,3 +263,24 @@ function keyupdate(byref ppsa as string)
    data$ = data$ + mac$
    call emm(leadin$,ppsa,leadout$,data$)
 end function
+
+
+function conaxdatum(byref jahr as integer,byref monat as byte,byref tag as byte,byref cnxdate as integer)
+'unsigned _month:4;
+'unsigned _years:4;
+'unsigned _day:5;
+'unsigned _tenyear:3;
+'111 11111 1111 1111
+
+'    _conaxdate._bit._tenyear = ((ltm->tm_year + 1900) - 1990) / 10;
+'    _conaxdate._bit._years = ((ltm->tm_year + 1900) - 1990) % 10;
+'    _conaxdate._bit._day = ltm->tm_mday;
+'    _conaxdate._bit._month = ltm->tm_mon +1;
+   cnxdate = (jahr - 1990) / 10
+   cnxdate = cnxdate shl 5
+   cnxdate = cnxdate or tag
+   cnxdate = cnxdate shl 4
+   cnxdate = cnxdate or ((jahr - 1990) mod 10)
+   cnxdate = cnxdate shl 4
+   cnxdate = cnxdate or monat
+end function

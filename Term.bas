@@ -38,6 +38,7 @@ dim servicename as string
 dim cw1 as string*8
 dim cw0 as string*8
 dim conaxdate as string*4
+dim result as integer at conaxdate
 dim shastring as string
 
 '  Execution starts here
@@ -72,6 +73,8 @@ call keyupdate(ppsa)
 '########################## GENARATE EMM ##########################
 cw1 = chr$(&h11,&h12,&h13,&h14,&h15,&h16,&h17,&h18)
 cw0 = chr$(&h01,&h02,&h03,&h04,&h05,&h06,&h07,&h08)
-conaxdate = chr$(&h61,&h0c,0,0)
+call conaxdatum(2020,9,10,result)
 acc = chr$(0,0,0,2)
+
 call emmg(&h20,conaxdate,cw1,cw0,serviceid,acc)
+
