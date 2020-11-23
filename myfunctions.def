@@ -118,22 +118,148 @@ function cardinfo()
    call getdata(LC=0,data$,LE=laenge) : Call CheckSW1SW2()
 end function
 
-function persohash()
-dim hashtest as string, mac$ as string
-hashtest = shahash("test")
+function emmg(ki as byte,byref cdate as string,byref c1 as string,byref c0 as string,byref sid as string,byref acc as string)
+   private data as string,i as byte
+   private leadin$ as string*9 = chr$(&h14,&h48,&h00,&h80,&h70,&h44,&h70,&h42,&h64)
+   private mac$ as string*16
 
-mac$ = omac(128,hashtest,"test")
-
-call sha("test"+mac$): ResetCard : Call CheckSW1SW2()
+   print "Generate EMM:"
+   print "cw0: ";
+   for i = 1 to len(c0)
+      if asc(c0(i)) < &h10 then
+         print "0";
+      end if
+      print hex$(asc(c0(i)));
+   next i
+   print
+      print "cw1: ";
+   for i = 1 to len(c0)
+      if asc(c1(i)) < &h10 then
+         print "0";
+      end if
+      print hex$(asc(c1(i)));
+   next i
+   print
+   print "Service-ID: ";hex$(asc(sid(1)));hex$(asc(sid(2)))
+   print "Date: ";
+   if asc(cdate(1)) < &h10 then print "0";
+   print hex$(asc(cdate(1)));
+   if asc(cdate(2)) < &h10 then print "0";
+   print hex$(asc(cdate(2)))
+   print "Access-Criteria: ";
+      for i = 1 to len(acc)
+      if asc(acc(i)) < &h10 then
+         print "0";
+      end if
+      print hex$(asc(acc(i)));
+   next i
+   print
+   print "Using Key: " hex$(ki)
+   data = data + chr$(&h20,&h04) + cdate + chr$(&h40,&h0f) + c1 + c0  + chr$(&h21,2) + sid + chr$(&h22,4) + acc
+   
+   for i = len(data) to &h2F
+      data = data + chr$(&hCC)
+   next i
+   
+   mac$ = omac(128,key(ki),data)
+   call aes_cbc_e(data,ki)
+   data = leadin$ + chr$(ki) + data + mac$
+   call ecm(LC=len(data),data) : call respond
+   call getdata(LC=0,data,LE=laenge) : call respond
+   print "Card-Response:"
+   for i = 1 to len(data)
+      if asc(data(i)) < &h10 then
+         print "0";
+      end if
+      print hex$(asc(data(i)));
+   next i
+   print
+   print "CMD-Status: ";
+   print hex$(sw1);
+   if sw2 < &h10 then print "0";
+   print hex$(sw2)
+   
 end function
 
-function setmasterkey()
-   private leadin$ as string = chr$(&h12,&h4E,&h82,&h70,&h4B,&h00,&h00,&h00)
-   private data$ as string = chr$(&ha0,&h00,&h12,&h34,&h56,&h78,&ha0,&h22,&h10,&h11,&h12,&h13,&h14,&h15,&h16,&h17,&h18,&h19,&h20,&h21,&h22,&h23,&h24,&h25,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC)
-   key(&h99) = shahash("test")
-   private mac$ as string 
+
+function initcard(byref shastring as string,byref ppua as string, byref ppsa as string)
+   private hashtest as string,mac$ as string
+   private leadinemm$ as string = chr$(&h12,&h4E,&h82,&h70,&h4B,&h00,&h00,&h00)
+   private persoua as string*4 = chr$(255,255,255,255)
+   private leadout$ as string = chr$(&h70,&h42,&h64,&h10)
+   private data$ as string
+
+   hashtest = shahash(shastring)
+   mac$ = omac(128,hashtest,shastring)
+   call sha(shastring+mac$)':resetcard:call cardinfo
+
+   data$ = chr$(&ha0,&h00)+ppua+chr$(&ha0,&h22)+key(&h01)+chr$(&ha0,&h02)+ppsa+chr$(&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC,&hCC)
+   
+   key(&h99) = shahash(shastring)
    mac$ = omac(128,key(&h99),data$)
    call aes_cbc_e(data$,&h99)
    data$ = data$ + mac$
-   call emm(leadin$,chr$(&hff,&hff,&hff,&hff),chr$(&h70,&h42,&h64,&h10),data$) : ResetCard : Call CheckSW1SW2()
+
+   call emm(leadinemm$,persoua,leadout$,data$):resetcard:call cardinfo()
+
+end function
+
+function createprovider(byref ppua as string,byref sid as string,byref bos as string,byref eos as string, byref pgmname as string, byref acc as string,byref ppsa as string)
+   private leadinemm$ as string = chr$(&h12,&h4E,&h82,&h70,&h4B,&h00,&h00,&h00)
+   private leadout$ as string = chr$(&h70,&h42,&h64,&h10)
+   private data$ as string,mac$ as string, i as byte
+   
+   print "Create Provider:"
+   print "Name: ";pgmname
+   print "Service-ID: ";hex$(asc(sid(1)));hex$(asc(sid(2)))
+   print "Date: ";
+   if asc(bos(1)) < &h10 then print "0";
+   print hex$(asc(bos(1)));
+   if asc(bos(2)) < &h10 then print "0";
+   print hex$(asc(bos(2)));" - ";
+   if asc(eos(1)) < &h10 then print "0";
+   print hex$(asc(eos(1)));
+   if asc(eos(2)) < &h10 then print "0";
+   print hex$(asc(eos(2)))
+    print "Access-Criteria: ";
+      for i = 1 to len(acc)
+      if asc(acc(i)) < &h10 then
+         print "0";
+      end if
+      print hex$(asc(acc(i)));
+   next i
+   print
+   print
+   print
+   
+   for i = len(pgmname) to 14
+      pgmname = pgmname + " "
+   next i
+   
+
+   data$ = chr$(&ha0,&h00)+ppua+chr$(&ha0,&h10)+pgmname+chr$(&ha0,&h01)+sid+chr$(&ha0,&h03)+bos+eos+chr$(&ha0,&h04)+acc
+   if ppsa <> chr$(0,0,0,0) then data$ = data$ + chr$(&ha0,2)+ppsa
+
+   for i = len(data$) to &h2F
+      data$ = data$ + chr$(&hCC)
+   next i
+  
+   key(&h10) = omac(128,key(&h01),ppua)
+   mac$ = omac(128,key(&h10),data$)
+   call aes_cbc_e(data$,&h10)
+   data$ = data$ + mac$
+   call emm(leadinemm$,ppua,leadout$,data$)
+
+end function
+
+function keyupdate(byref ppsa as string)
+   private leadin$ as string, leadout$ as string, mac$ as string,data$ as string
+   leadin$ = chr$(&h12,&h4E,&h82,&h70,&h4B,&h00,&h00,&h00)
+   leadout$ = chr$(&h70,&h42,&h64,&h10)
+   data$ = chr$(&ha0,&h02)+ppsa+chr$(&hA0,&h20)+key(&h20)+chr$(&ha0,&h21)+key(&h21)+chr$(&hcc,&hcc,&hcc,&hcc,&hcc,&hcc) 
+   key(&h11) = omac(128,key(&h01),ppsa)
+   mac$ = omac(128,key(&h11),data$)
+   call aes_cbc_e(data$,&h11)
+   data$ = data$ + mac$
+   call emm(leadin$,ppsa,leadout$,data$)
 end function
