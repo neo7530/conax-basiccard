@@ -11,48 +11,12 @@ Function SendAppT0()
 sc.reset
 sc.delay(1000)
 
-sc.write("F0 00 00 00 06 10 10 04 C4 B4 01")
-sc.delay(100)
+sc.write("DD F1 00 00 27 64 61 73 20 69 73 74 20 65 69 6E 20 6C 61 6E 67 65 72 20 74 65 73 74 B8 4D 9C 17 4A B2 0D 78 A5 6C E2 EF DE 3E 1C 94")
+sc.delay(1000)
 sc.read(2)
 
-sc.write("F0 00 00 02 04 10 10 61 0B")
-sc.delay(100)
-sc.read(2)
-
-sc.write("F0 00 00 03 04 10 10 7F 0C")
-sc.delay(100)
-sc.read(2)
-
-sc.write("F0 00 00 01 06 10 10 00 89 54 40")
-sc.delay(100)
-sc.read(2)
-
-sc.write("F0 00 00 05 06 10 10 00 00 00 01")
-sc.delay(100)
-sc.read(2)
-
-sc.write("F0 00 00 04 0b 10 10 4E 65 6F 56 69 73 69 6F 6E")
-sc.delay(100)
-sc.read(2)
-
-'sc.write("F0 00 01 80 12 10 10 40 BF E7 46 24 69 60 C5 60 AF 34 32 16 14 13 AD")
-'sc.delay(100)
-'sc.read(2)
-
-sc.write("F0 00 01 20 12 10 10 BB AA 99 88 77 66 55 44 FF EE DD CC 33 22 11 00")
-sc.delay(100)
-sc.read(2)
-
-sc.write("F0 00 01 21 12 10 10 77 66 55 44 BB AA 99 88 33 22 11 00 FF EE DD CC")
-sc.delay(100)
-sc.read(2)
-
-'sc.write("F0 00 01 81 12 10 10 31 F9 D3 52 AB BA 34 BE FB 82 B1 D5 33 4C AC 59")
-'sc.delay(100)
-'sc.read(2)
-
-sc.write("F0 00 01 10 12 10 10 00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF")
-sc.delay(100)
+sc.write("DD 84 00 00 50 12 4E 82 70 4B 00 00 00 FF FF FF FF 70 42 64 10 16 B7 97 73 39 76 93 06 8B 00 01 8B 59 56 7F 6D 53 13 99 60 18 5E DF 5D A3 65 BE CA 88 D6 16 C0 B7 A3 FF 40 D2 98 FE C3 90 84 D9 4D F9 DC 98 81 A4 46 60 8A 47 79 02 06 0F 12 BE BC 69 7E 16 61")
+sc.delay(1000)
 sc.read(2)
 
 End Function

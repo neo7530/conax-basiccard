@@ -573,6 +573,7 @@ private cmac as string
   
   if cmac = check then
     key(&h99) = testkey
+    pincode = "0000"
     ppua = ""
     ppsa = ""
     key(&h20) = ""
@@ -581,14 +582,16 @@ private cmac as string
     key(&h10) = ""
     key(&h11) = ""
     for i = 0 to 9
-      servicelist(i).pgmname = ""
-      servicelist(i).serviceid = ""
-      servicelist(i).acc = ""
-      servicelist(i).accold = ""
-      servicelist(i).bos = ""
-      servicelist(i).bosold = ""
-      servicelist(i).eos = ""
-      servicelist(i).eosold = ""
+      if servicelist(i).serviceid <> chr$(0,0) then 
+        servicelist(i).pgmname = ""
+        servicelist(i).serviceid = ""
+        servicelist(i).acc = ""
+        servicelist(i).accold = ""
+        servicelist(i).bos = ""
+        servicelist(i).bosold = ""
+        servicelist(i).eos = ""
+        servicelist(i).eosold = ""
+      end if
     next i
   else 
     sw1sw2 = &h9011

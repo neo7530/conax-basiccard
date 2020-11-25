@@ -12,21 +12,11 @@ MapFile=false
 SourceFile=Card.BAS
 
 [Counters Window]
-Block0=&quote;=my,fAB7L,_nUUs!+V{~U:B[cV&lt;bfEUyy&quote;YX&apos;{LM~BcZpNu8-s[,5;=
-CRC=0x8889687f
+Block0=&quote;=my,fAB7L,_m]]:!a5*&amp;W*K[P__+&amp;!zG*E&amp;C+G4?;cwNfK$7L~_u%[e
+CRC=0xa9b22f47
 Hex=false
 Length=46
 Visible=true
-
-[EEPROM]
-Block0=B^!(Y8PPBM@kNdk5rnJ8O+)9zNp0hTqB#30g{u&gt;6zuh;3Tw@.vf)SbOS&lt;hv)/;pxTR/}2=e
-Block1=0v&apos;|y!Z@H&lt;92*BuhlC|cINz-Z:7z,$6t/SX/%p%Yi;w[LkbeG/-;Kzz#^Wf=xFpmmTA:.W&amp;
-Block2=9?^m1_]&quote;xI%&gt;`f^W&lt;J&lt;lKO:&amp;H9?Y^VO{x@qZ([PPRKleF1I.&apos;|kE&quote;Yj3]{pB|v,\8:RJZV+
-Block3=*&amp;\-,oI%LSp92sm&lt;2p\7gt~a3lK#H;6#OChw{0)!._!L~r#|\2osH6:dtEt6UpP:g&amp;yP!V
-CRC=0xed172f0b
-Length=231
-MaskCRC=3391360738
-StartCRC=1158808244
 
 [Files Window]
 Block0=&quote;=my,fAB7L,_jjgu_+=LR*|&quote;L9:PS4]U6Og+$)Bp2G97rgrVDtb#jo:C
@@ -42,8 +32,8 @@ Length=46
 Visible=false
 
 [Window Geometry]
-Block0=&quote;=my,fAB7L,_mz+N6lKK8&quote;1IU4^mfaO|Cg&amp;g51O!x]+8l~,q2Soe(!b{
-CRC=0x28b14a2c
+Block0=&quote;=my,fAB7L,_mM&gt;Qjj0|3NJW4$rC,4Ug*/If6;-p{P&amp;VsQ_yiT%Of{&amp;k
+CRC=0xa9326834
 Length=46
 
 [Window Options]
