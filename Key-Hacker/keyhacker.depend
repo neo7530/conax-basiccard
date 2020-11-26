@@ -88,3 +88,54 @@
 	<stdint.h>
 	"aes.h"
 
+1606056200 source:r:\temp\conax-basiccard\key-hacker\aes.c
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"aes.h"
+
+1606231637 r:\temp\conax-basiccard\key-hacker\aes.h
+
+1606314427 source:r:\temp\conax-basiccard\key-hacker\main.c
+	<stdlib.h>
+	<stdio.h>
+	<stdint.h>
+	<time.h>
+	<Windows.h>
+	<unistd.h>
+	"rs232.h"
+	"sha1.h"
+	"aes.h"
+
+1578910549 r:\temp\conax-basiccard\key-hacker\rs232.h
+	<stdio.h>
+	<string.h>
+	<termios.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<fcntl.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<limits.h>
+	<sys/file.h>
+	<errno.h>
+	<windows.h>
+
+1606318096 r:\temp\conax-basiccard\key-hacker\sha1.h
+	"stdint.h"
+
+1578910549 source:r:\temp\conax-basiccard\key-hacker\rs232.c
+	"rs232.h"
+
+1606229524 source:r:\temp\conax-basiccard\key-hacker\sha1.cpp
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"sha1.h"
+
+1606229524 source:r:\temp\conax-basiccard\key-hacker\sha1.c
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"sha1.h"
+

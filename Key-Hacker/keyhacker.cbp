@@ -33,7 +33,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="rs232.h" />
-		<Unit filename="sha1.cpp" />
+		<Unit filename="sha1.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="sha1.h" />
 		<Extensions>
 			<code_completion />

@@ -21,7 +21,7 @@ void SHA1Transform(
     const unsigned char buffer[64]
     );
 
-void SHA1Init(
+extern void SHA1Init(
     SHA1_CTX * context
     );
 

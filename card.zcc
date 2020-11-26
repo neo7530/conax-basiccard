@@ -6,7 +6,7 @@ PhysicalReader=100
 VirtualReader=201
 
 [Compiler]
-ImageFile=true
+ImageFile=false
 ListingFile=false
 MapFile=false
 SourceFile=Card.BAS

@@ -8,7 +8,7 @@ COM3=Auto
 COM4=Auto
 
 [Compiler]
-ExeFile=true
+ExeFile=false
 ImageFile=false
 ListingFile=false
 MapFile=false
