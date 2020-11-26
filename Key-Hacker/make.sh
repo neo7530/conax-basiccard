@@ -1,1 +1,1 @@
-gcc -o hacker_type3 main.c rs232.c
+gcc -o conax_perso main.c rs232.c sha1.c aes.c
