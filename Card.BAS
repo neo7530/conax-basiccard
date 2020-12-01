@@ -52,7 +52,7 @@ eeprom ppua as string*4
 eeprom ppsa as string*4
 eeprom maturity as string*1 = &h01
 eeprom pincode as string*4 = &h31,&h32,&h33,&h34
-eeprom caid as string*2 = &h0b,&h00
+eeprom caid as string*2 = &h0b,&h02
 
 #include cardfunctions.def
 
