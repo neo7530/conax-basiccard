@@ -139,3 +139,37 @@
 	<stdint.h>
 	"sha1.h"
 
+1632743956 source:c:\users\mz\documents\github\conax-basiccard\key-hacker\aes.c
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"aes.h"
+
+1632743956 c:\users\mz\documents\github\conax-basiccard\key-hacker\aes.h
+
+1632743956 source:c:\users\mz\documents\github\conax-basiccard\key-hacker\rs232.c
+	"rs232.h"
+
+1632743956 c:\users\mz\documents\github\conax-basiccard\key-hacker\rs232.h
+	<stdio.h>
+	<string.h>
+	<termios.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<fcntl.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<limits.h>
+	<sys/file.h>
+	<errno.h>
+	<windows.h>
+
+1632743956 source:c:\users\mz\documents\github\conax-basiccard\key-hacker\sha1.c
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+	"sha1.h"
+
+1632743956 c:\users\mz\documents\github\conax-basiccard\key-hacker\sha1.h
+	"stdint.h"
+
