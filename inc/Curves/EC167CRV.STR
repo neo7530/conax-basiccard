@@ -1,0 +1,45 @@
+Rem  EC167CRV.STR
+Rem
+Rem  This file defines the five EC-167 Elliptic Curves as string constants,
+Rem  for the MultiApplication BasicCard Loader Command
+Rem
+Rem      LCEC167SetCurve (String*64)
+Rem
+Rem  Include this file, then in the Component Definition section e.g.
+Rem
+Rem      Call LCEC167SetCurve (EC167Curve3String)
+
+#IfNotDef EC167CrvStrIncluded
+Const EC167CrvStrIncluded = True
+
+Const EC167Curve1String = Chr$(_
+  &H01,_ ' a
+  &H78,&H0D,&H32,&H38,&H1A,&H6F,&HA7,&H19,&HF2,&HAA,&H60,&HD2,&H66,&H53,&HEA,&HFF,&HD6,&HF7,&H2E,&H22,&H41,_ ' b
+  &H40,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H04,&HCA,&H54,&H9C,&HBF,&H6D,&H09,&HFC,&H17,&HD3,&HDF,_ ' r
+  &H84,&HC8,&H8E,&HC6,&HF1,&H4E,&H89,&H71,&H5D,&H2C,&H4E,&H12,&HDD,&H59,&H61,&HC2,&H33,&HEF,&HD4,&H3E,&H4F)  ' G
+
+Const EC167Curve2String = Chr$(_
+  &H01,_ ' a
+  &H4D,&H1C,&H2B,&H05,&H0B,&HEE,&H5B,&HEE,&H64,&H3B,&H5C,&H80,&H82,&HF7,&HEF,&HCC,&HAF,&H09,&H45,&HF9,&H2F,_ ' b
+  &H40,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H04,&H3B,&H3C,&H27,&HAE,&HB6,&H2D,&HC5,&H81,&H87,&H7B,_ ' r
+  &H5B,&HE2,&H9D,&HA6,&H12,&H25,&H60,&H87,&HFF,&H5B,&H68,&HD4,&HC0,&H03,&H86,&H8C,&H15,&H9D,&H77,&HD9,&H7E)  ' G
+
+Const EC167Curve3String = Chr$(_
+  &H01,_ ' a
+  &H21,&HC2,&H96,&H8C,&H28,&H80,&H87,&H43,&HC3,&H04,&HE5,&H18,&HEA,&HF3,&H6F,&H31,&H09,&H9B,&H52,&H7C,&H9A,_ ' b
+  &H40,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H01,&HCB,&HA0,&H36,&H1F,&H03,&H82,&HB6,&H54,&H84,&H71,_ ' r
+  &HE4,&HAD,&HC2,&H3A,&H66,&H99,&H86,&HC1,&H95,&H76,&HAC,&HD6,&H9D,&HA1,&H5E,&H39,&H24,&H88,&H7C,&H1C,&H7D)  ' G
+
+Const EC167Curve4String = Chr$(_
+  &H01,_ ' a
+  &H1A,&H8B,&H2B,&H88,&HD2,&HDF,&H30,&HD3,&H37,&HF0,&H58,&HC6,&HA8,&H65,&HCE,&H7D,&H38,&H07,&HD9,&H7B,&HEF,_ ' b
+  &H40,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H07,&H7F,&H47,&H7C,&H6B,&H2E,&H30,&H93,&HE5,&HD5,&HC9,_ ' r
+  &HC8,&H66,&HC5,&H07,&H02,&H27,&H5C,&H87,&H58,&H98,&H6B,&H6B,&HFA,&H21,&H9D,&H09,&HEE,&HBB,&H5B,&H2D,&HBB)  ' G
+
+Const EC167Curve5String = Chr$(_
+  &H01,_ ' a
+  &H79,&H96,&H4F,&HD8,&H0B,&H85,&HAE,&H56,&H9E,&H4C,&H04,&H4B,&H04,&H8B,&H00,&HAF,&H1F,&HCD,&H0B,&HA3,&H82,_ ' b
+  &H40,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H00,&H03,&HB2,&H6E,&HAC,&H20,&HB0,&H3B,&H17,&HFE,&H0B,&H51,_ ' r
+  &HDA,&H66,&H12,&HD9,&H32,&H92,&H41,&HE0,&H58,&H0A,&HA3,&H6B,&HFC,&HA8,&HC9,&HE0,&H40,&H9B,&HC9,&H8A,&H54)  ' G
+
+#EndIf ' EC167CrvStrIncluded

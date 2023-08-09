@@ -1,0 +1,44 @@
+Rem BasicCard Sample Source Code
+Rem ------------------------------------------------------------------
+Rem Copyright (C) 1997-1999 ZeitControl GmbH
+Rem You have a royalty-free right to use, modify, reproduce and 
+Rem distribute the Sample Application Files (and/or any modified 
+Rem version) in any way you find useful, provided that you agree 
+Rem that ZeitControl GmbH has no warranty, obligations or liability
+Rem for any Sample Application Files.
+Rem ------------------------------------------------------------------
+
+Rem  ERRFILE.DEF
+Rem
+Rem  Procedure for re-directing error messages to a disk file
+
+#IfNotDef ErrfileDefIncluded ' Prevent multiple inclusion
+Const ErrfileDefIncluded = True
+
+#Include FILEIO.DEF
+
+Public ErrorFilename As String
+
+Rem  Function ErrorFilenum()
+Rem
+Rem  Open an error file if the ErrorFilename string is non-empty
+
+Function ErrorFilenum()
+
+  If ErrorFilename = "" Then
+    ErrorFilenum = 0 ' 0 => print to screen
+  Else
+    Rem  Save FileError (in case that's what the user wants to report!)
+    Private SavedFileError
+    SavedFileError = FileError : FileError = feFileOK
+    ErrorFilenum = Open ErrorFilename For Output
+    If FileError <> feFileOK Then
+      Print "Warning: Can't open error file " + ErrorFilename
+      ErrorFilenum = 0
+    End If
+    FileError = SavedFileError
+  End If
+
+End Function ' ErrorFilenum
+
+#EndIf ' ErrfileDefIncluded

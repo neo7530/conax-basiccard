@@ -1,0 +1,69 @@
+Rem BasicCard Sample Source Code
+Rem ------------------------------------------------------------------
+Rem Copyright (C) 1997-1999 ZeitControl GmbH
+Rem You have a royalty-free right to use, modify, reproduce and 
+Rem distribute the Sample Application Files (and/or any modified 
+Rem version) in any way you find useful, provided that you agree 
+Rem that ZeitControl GmbH has no warranty, obligations or liability
+Rem for any Sample Application Files.
+Rem ------------------------------------------------------------------
+
+Rem  CRC.DEF
+Rem
+Rem  CRC calculations
+
+#IfNotDef CrcDefIncluded ' Prevent multiple inclusion
+Const CrcDefIncluded = True
+
+Rem  Sub UpdateCRC (CRC, ByVal Data@)
+Rem
+Rem  Update the CRC with the given data byte. The algorithm used here is
+Rem  equivalent to the bit-by-bit algorithm described in the BasicCard
+Rem  documentation (Section 6.4.8, "The EEPROM CRC Command"), but the table
+Rem  look-up used here is faster.
+
+Sub UpdateCRC (CRC, ByVal Data@)
+
+  Rem  CRCTable(I) is the CRC over the single data byte I:
+
+  Static CRCTable(0 To 255) = _
+    &H0000,&H0194,&H0328,&H02BC,&H0650,&H07C4,&H0578,&H04EC,_
+    &H0CA0,&H0D34,&H0F88,&H0E1C,&H0AF0,&H0B64,&H09D8,&H084C,_
+    &H1940,&H18D4,&H1A68,&H1BFC,&H1F10,&H1E84,&H1C38,&H1DAC,_
+    &H15E0,&H1474,&H16C8,&H175C,&H13B0,&H1224,&H1098,&H110C,_
+    &H3280,&H3314,&H31A8,&H303C,&H34D0,&H3544,&H37F8,&H366C,_
+    &H3E20,&H3FB4,&H3D08,&H3C9C,&H3870,&H39E4,&H3B58,&H3ACC,_
+    &H2BC0,&H2A54,&H28E8,&H297C,&H2D90,&H2C04,&H2EB8,&H2F2C,_
+    &H2760,&H26F4,&H2448,&H25DC,&H2130,&H20A4,&H2218,&H238C,_
+    &H6500,&H6494,&H6628,&H67BC,&H6350,&H62C4,&H6078,&H61EC,_
+    &H69A0,&H6834,&H6A88,&H6B1C,&H6FF0,&H6E64,&H6CD8,&H6D4C,_
+    &H7C40,&H7DD4,&H7F68,&H7EFC,&H7A10,&H7B84,&H7938,&H78AC,_
+    &H70E0,&H7174,&H73C8,&H725C,&H76B0,&H7724,&H7598,&H740C,_
+    &H5780,&H5614,&H54A8,&H553C,&H51D0,&H5044,&H52F8,&H536C,_
+    &H5B20,&H5AB4,&H5808,&H599C,&H5D70,&H5CE4,&H5E58,&H5FCC,_
+    &H4EC0,&H4F54,&H4DE8,&H4C7C,&H4890,&H4904,&H4BB8,&H4A2C,_
+    &H4260,&H43F4,&H4148,&H40DC,&H4430,&H45A4,&H4718,&H468C,_
+    &HCA00,&HCB94,&HC928,&HC8BC,&HCC50,&HCDC4,&HCF78,&HCEEC,_
+    &HC6A0,&HC734,&HC588,&HC41C,&HC0F0,&HC164,&HC3D8,&HC24C,_
+    &HD340,&HD2D4,&HD068,&HD1FC,&HD510,&HD484,&HD638,&HD7AC,_
+    &HDFE0,&HDE74,&HDCC8,&HDD5C,&HD9B0,&HD824,&HDA98,&HDB0C,_
+    &HF880,&HF914,&HFBA8,&HFA3C,&HFED0,&HFF44,&HFDF8,&HFC6C,_
+    &HF420,&HF5B4,&HF708,&HF69C,&HF270,&HF3E4,&HF158,&HF0CC,_
+    &HE1C0,&HE054,&HE2E8,&HE37C,&HE790,&HE604,&HE4B8,&HE52C,_
+    &HED60,&HECF4,&HEE48,&HEFDC,&HEB30,&HEAA4,&HE818,&HE98C,_
+    &HAF00,&HAE94,&HAC28,&HADBC,&HA950,&HA8C4,&HAA78,&HABEC,_
+    &HA3A0,&HA234,&HA088,&HA11C,&HA5F0,&HA464,&HA6D8,&HA74C,_
+    &HB640,&HB7D4,&HB568,&HB4FC,&HB010,&HB184,&HB338,&HB2AC,_
+    &HBAE0,&HBB74,&HB9C8,&HB85C,&HBCB0,&HBD24,&HBF98,&HBE0C,_
+    &H9D80,&H9C14,&H9EA8,&H9F3C,&H9BD0,&H9A44,&H98F8,&H996C,_
+    &H9120,&H90B4,&H9208,&H939C,&H9770,&H96E4,&H9458,&H95CC,_
+    &H84C0,&H8554,&H87E8,&H867C,&H8290,&H8304,&H81B8,&H802C,_
+    &H8860,&H89F4,&H8B48,&H8ADC,&H8E30,&H8FA4,&H8D18,&H8C8C
+
+  Private Msb As Byte At CRC
+  Private Lsb As Byte At CRC+1
+  CRC = Msb Xor CRCTable(Lsb Xor Data@)
+
+End Sub ' UpdateCRC
+
+#EndIf ' CrcDefIncluded

@@ -1,0 +1,36 @@
+#IfNotDef LoadCommDefIncluded
+Const LoadCommDefIncluded = True
+
+#IfDef MultiAppBasicCard
+
+Rem  SYSTEM subcodes (SYSTEM opcode is &H06)
+
+Declare Loader Command &H10 &H49 LCReadKeyFile (String)
+
+Rem  System Library procedures
+
+Declare Loader Command &HC8 &H01 LCEC167SetCurve (String*64)
+Declare Loader Command &HCC &H01 LCEC211SetCurve (String*82)
+Declare Loader Command &HCD &H01 LCECpSetCurve (Byte)
+
+Rem  MultiApplication BasicCard built-in commands
+
+Declare Loader Command &HC0 &H10 LCStartEncryption (Key, Byte)
+Declare Loader Command &HC0 &H12 LCEndEncryption()
+Declare Loader Command &HC0 &H42 LCExternalAuthenticate (Key, Byte)
+Declare Loader Command &HC0 &H44 LCInternalAuthenticate (Key, Byte)
+Declare Loader Command &HC0 &H46 LCVerify (Key)
+Declare Loader Command &HC0 &H92 LCGrantPrivilege (Privilege, File)
+Declare Loader Command &HC0 &H94 LCAuthenticateFile (ByRef Key, Byte, Private Key, File)
+Declare Loader Command &HC0 &H98 LCLoadSequence (Byte)
+Declare Loader Command &HC0 &H9A LCStartSecureTransport (ByRef Key, Byte)
+Declare Loader Command &HC0 &H9B LCEndSecureTransport()
+Declare Loader Command &HC0 &H9C LCCheckSerialNumber()
+
+#If CardMajorVersion = 8
+Declare Loader Command &HC0 &HBC LCWriteCardConfig (Byte, String)
+#EndIf
+
+#EndIf ' #IfDef MultiAppBasicCard
+
+#EndIf ' LoadCommDefIncluded

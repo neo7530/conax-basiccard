@@ -1,5 +1,6 @@
 #include ./inc/omac.def
 #include ./inc/sha-1.def
+'#include card.def
 
 function aes_cbc_enc(byref data$ as string,skip as byte)
 private cw0 as string*16

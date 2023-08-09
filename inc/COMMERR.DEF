@@ -1,0 +1,181 @@
+Rem BasicCard Sample Source Code
+Rem ------------------------------------------------------------------
+Rem Copyright (C) 1997-1999 ZeitControl GmbH
+Rem You have a royalty-free right to use, modify, reproduce and 
+Rem distribute the Sample Application Files (and/or any modified 
+Rem version) in any way you find useful, provided that you agree 
+Rem that ZeitControl GmbH has no warranty, obligations or liability
+Rem for any Sample Application Files.
+Rem ------------------------------------------------------------------
+
+Rem  COMMERR.DEF
+Rem
+Rem  Communications error checking procedure
+
+#IfNotDef CommerrDefIncluded ' Prevent multiple inclusion
+Const CommerrDefIncluded = True
+
+#Include COMMANDS.DEF
+#Include ERRFILE.DEF
+
+Rem  Sub CheckSW1SW2()
+Rem
+Rem  Checks SW1-SW2. If an error occurred, prints out the name of the
+Rem  communications error code, and exits.
+
+Rem  Function SWName$()
+Rem
+Rem  Returns the ASCII name of the comms error in SW1-SW2
+
+Function SWName$()
+
+  If SW1 = sw1PCodeError Then
+    Select Case SW2
+      Case pcStackOverflow:       SWName$ = "pcStackOverflow"
+      Case pcDivideByZero:        SWName$ = "pcDivideByZero"
+      Case pcNotImplemented:      SWName$ = "pcNotImplemented"
+      Case pcBadRamHeap:          SWName$ = "pcBadRamHeap"
+      Case pcBadEepromHeap:       SWName$ = "pcBadEepromHeap"
+      Case pcReturnWithoutGoSub:  SWName$ = "pcReturnWithoutGoSub"
+      Case pcBadSubscript:        SWName$ = "pcBadSubscript"
+      Case pcBadBounds:           SWName$ = "pcBadBounds"
+      Case pcInvalidReal:         SWName$ = "pcInvalidReal"
+      Case pcOverflow:            SWName$ = "pcOverflow"
+      Case pcNegativeSqrt:        SWName$ = "pcNegativeSqrt"
+      Case pcDimensionError:      SWName$ = "pcDimensionError"
+      Case pcBadStringCall:       SWName$ = "pcBadStringCall"
+      Case pcOutOfMemory:         SWName$ = "pcOutOfMemory"
+      Case pcArrayNotDynamic:     SWName$ = "pcArrayNotDynamic"
+      Case pcArrayTooBig:         SWName$ = "pcArrayTooBig"
+      Case pcDeletedArray:        SWName$ = "pcDeletedArray"
+      Case pcPCodeDisabled:       SWName$ = "pcPCodeDisabled"
+      Case pcBadSystemCall:       SWName$ = "pcBadSystemCall"
+      Case pcBadKey:              SWName$ = "pcBadKey"
+      Case pcBadLibraryCall:      SWName$ = "pcBadLibraryCall"
+      Case pcStackUnderflow:      SWName$ = "pcStackUnderflow"
+      Case pcInvalidAddress:      SWName$ = "pcInvalidAddress"
+      Case Else:                  SWName$ = "unknown error code"
+    End Select
+    SWName$ = "PCodeError " + Str$ (SW2) + " (" + SWName$ + ")"
+
+  ElseIf SW1SW2 >= swRetriesRemaining And SW1SW2 <= swRetriesRemaining + 15 Then
+    Private Retries: Retries = SW1SW2 - swRetriesRemaining
+    SWName$ = "swRetriesRemaining" + "(" + Str$(Retries) + ")"
+
+  Else
+    Select Case SW1SW2
+      Case swCommandOK:              SWName$ = "swCommandOK"
+      Case swEepromWriteError:       SWName$ = "swEepromWriteError"
+      Case swBadEepromHeap:          SWName$ = "swBadEepromHeap"
+      Case swBadFileChain:           SWName$ = "swBadFileChain"
+      Case swKeyNotFound:            SWName$ = "swKeyNotFound"
+      Case swPolyNotFound:           SWName$ = "swPolyNotFound"
+      Case swKeyTooShort:            SWName$ = "swKeyTooShort"
+      Case swKeyDisabled:            SWName$ = "swKeyDisabled"
+      Case swUnknownAlgorithm:       SWName$ = "swUnknownAlgorithm"
+      Case swAlreadyEncrypting:      SWName$ = "swAlreadyEncrypting"
+      Case swNotEncrypting:          SWName$ = "swNotEncrypting"
+      Case swBadCommandCRC:          SWName$ = "swBadCommandCRC"
+      Case swDesCheckError:          SWName$ = "swDesCheckError"
+      Case swCoprocessorError:       SWName$ = "swCoprocessorError"
+      Case swAesCheckError:          SWName$ = "swAesCheckError"
+      Case swBadSignature:           SWName$ = "swBadSignature"
+      Case swBadAuthenticate:        SWName$ = "swBadAuthenticate"
+      Case swLcLeError:              SWName$ = "swLcLeError"
+      Case swCommandTooLong:         SWName$ = "swCommandTooLong"
+      Case swResponseTooLong:        SWName$ = "swResponseTooLong"
+      Case swInvalidState:           SWName$ = "swInvalidState"
+      Case swCardUnconfigured:       SWName$ = "swCardUnconfigured"
+      Case swNewStateError:          SWName$ = "swNewStateError"
+      Case swP1P2Error:              SWName$ = "swP1P2Error"
+      Case swOutsideEeprom:          SWName$ = "swOutsideEeprom"
+      Case swDataNotFound:           SWName$ = "swDataNotFound"
+      Case swINSNotFound:            SWName$ = "swINSNotFound"
+      Case swReservedINS:            SWName$ = "swReservedINS"
+      Case swCLANotFound:            SWName$ = "swCLANotFound"
+      Case swReservedCLA:            SWName$ = "swReservedCLA"
+      Case swInternalError:          SWName$ = "swInternalError"
+      Case swNoCardReader:           SWName$ = "swNoCardReader"
+      Case swCardReaderError:        SWName$ = "swCardReaderError"
+      Case swNoCardInReader:         SWName$ = "swNoCardInReader"
+      Case swCardPulled:             SWName$ = "swCardPulled"
+      Case swT1Error:                SWName$ = "swT1Error"
+      Case swCardError:              SWName$ = "swCardError"
+      Case swCardNotReset:           SWName$ = "swCardNotReset"
+      Case swKeyNotLoaded:           SWName$ = "swKeyNotLoaded"
+      Case swPolyNotLoaded:          SWName$ = "swPolyNotLoaded"
+      Case swBadResponseCRC:         SWName$ = "swBadResponseCRC"
+      Case swCardTimedOut:           SWName$ = "swCardTimedOut"
+      Case swTermOutOfMemory:        SWName$ = "swTermOutOfMemory"
+      Case swBadDesResponse:         SWName$ = "swBadDesResponse"
+      Case swInvalidComPort:         SWName$ = "swInvalidComPort"
+      Case swNoPcscDriver:           SWName$ = "swNoPcscDriver"
+      Case swPcscReaderBusy:         SWName$ = "swPcscReaderBusy"
+      Case swPcscError:              SWName$ = "swPcscError"
+      Case swComPortBusy:            SWName$ = "swComPortBusy"
+      Case swBadATR:                 SWName$ = "swBadATR"
+      Case swT0Error:                SWName$ = "swT0Error"
+      Case swPTSError:               SWName$ = "swPTSError"
+      Case swDataOverrun:            SWName$ = "swDataOverrun"
+      Case swBadAesResponse:         SWName$ = "swBadAesResponse"
+      Case swZCMDCardObsolete:       SWName$ = "swZCMDCardObsolete"
+      Case swZCMDTermObsolete:       SWName$ = "swZCMDTermObsolete"      
+      Case swCommandTooShort:        SWName$ = "swCommandTooShort"
+      Case swCommandFormat:          SWName$ = "swCommandFormat"
+      Case swResponseTooShort:       SWName$ = "swResponseTooShort"
+      Case swUnexpectedResponse:     SWName$ = "swUnexpectedResponse"
+      Case swInvalidSetState:        SWName$ = "swInvalidSetState"
+      Case swTerminalProgramRunning: SWName$ = "swTerminalProgramRunning"
+      Case swAppLoadFailure:         SWName$ = "swAppLoadFailure"
+      Case swBadComponentName:       SWName$ = "swBadComponentName"
+      Case swComponentNotFound:      SWName$ = "swComponentNotFound"
+      Case swAccessDenied:           SWName$ = "swAccessDenied"
+      Case swComponentAlreadyExists: SWName$ = "swComponentAlreadyExists"
+      Case swBadComponentChain:      SWName$ = "swBadComponentChain"
+      Case swNameTooLong:            SWName$ = "swNameTooLong"
+      Case swOutOfMemory:            SWName$ = "swOutOfMemory"
+      Case swInvalidACR:             SWName$ = "swInvalidACR"
+      Case swBadComponentType:       SWName$ = "swBadComponentType"
+      Case swKeyUsage:               SWName$ = "swKeyUsage"
+      Case swKeyAlgorithm:           SWName$ = "swKeyAlgorithm"
+      Case swTooManyTempFlags:       SWName$ = "swTooManyTempFlags"
+      Case swExecutableAcrDenied:    SWName$ = "swExecutableAcrDenied"
+      Case swApplicationNotFound:    SWName$ = "swApplicationNotFound"
+      Case swACRDepth:               SWName$ = "swACRDepth"
+      Case swBadComponentAttr:       SWName$ = "swBadComponentAttr"
+      Case swBadComponentData:       SWName$ = "swBadComponentData"
+      Case swBadAppFile:             SWName$ = "swBadAppFile"
+      Case swLoadSequenceActive:     SWName$ = "swLoadSequenceActive"
+      Case swLoadSequenceNotActive:  SWName$ = "swLoadSequenceNotActive"
+      Case swLoadSequencePhase:      SWName$ = "swLoadSequencePhase"
+      Case swBadEaxTag:              SWName$ = "swBadEaxTag"
+      Case swSecureTransportActive:  SWName$ = "swSecureTransportActive"
+      Case swSecureTransportInactive:SWName$ = "swSecureTransportInactive"
+      Case swComponentReferenced:    SWName$ = "swComponentReferenced"
+      Case swFileNotContiguous:      SWName$ = "swFileNotContiguous"
+      Case swAppFileOpen:            SWName$ = "swAppFileOpen"
+
+      Case Else:                     SWName$ = "&H" + Hex$ (SW1SW2)
+    End Select
+  End If
+
+End Function ' SWName$
+
+sub respond()
+laenge = sw2
+  if sw1sw2 >= &h9801 then
+    laenge = sw2
+  end if
+end sub
+
+
+Sub CheckSW1SW2()
+  laenge = sw2
+  If SW1SW2 = swCommandOK Or SW1 = sw1LeWarning Then Exit Sub
+  Private Filenum : Filenum = ErrorFilenum()
+  Print #Filenum, "Communications error: SW1-SW2 = " + SWName$()
+  If Filenum Then Close Filenum
+  Exit
+End Sub ' CheckSW1SW2
+
+#EndIf ' CommerrDefIncluded

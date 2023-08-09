@@ -1,0 +1,64 @@
+Rem BasicCard Sample Source Code
+Rem ------------------------------------------------------------------
+Rem Copyright (C) 1997-2004 ZeitControl GmbH
+Rem You have a royalty-free right to use, modify, reproduce and 
+Rem distribute the Sample Application Files (and/or any modified 
+Rem version) in any way you find useful, provided that you agree 
+Rem that ZeitControl GmbH has no warranty, obligations or liability
+Rem for any Sample Application Files.
+Rem ------------------------------------------------------------------
+
+Rem  Cryptographic Algorithm IDs
+
+#IfNotDef AlgIdDefIncluded ' Prevent multiple inclusion
+Const AlgIdDefIncluded = True
+
+Const AlgAutomatic        = &H00
+
+Const AlgSgLfsr           = &H11
+Const AlgSgLfsrCrc        = &H12
+
+Const AlgSingleDes        = &H21
+Const AlgTripleDes        = &H22
+Const AlgSingleDesCrc     = &H23
+
+Const AlgTripleDesCrc     = &H24 ' Retained for backwards compatibility
+Const AlgTripleDesEDE2Crc = &H24 ' New name for AlgTripleDesCrc
+
+Const AlgTripleDesEDE3Crc = &H25 ' Triple DES-EDE3 with CRC (24-byte key)
+
+Const AlgAes128           = &H31
+Const AlgAes192           = &H32
+Const AlgAes256           = &H33
+
+Const AlgEaxAes128        = &H41
+Const AlgEaxAes192        = &H42
+Const AlgEaxAes256        = &H43
+
+Const AlgOmacAes128       = &H81
+Const AlgOmacAes192       = &H82
+Const AlgOmacAes256       = &H83
+
+Const AlgEC167NR          = &HC1
+Const AlgEC167            = &HC1 ' Retained for backward compatibility
+Const AlgEC211NR          = &HC2
+Const AlgEC211            = &HC2 ' Retained for backward compatibility
+Const AlgEC167DSA         = &HC3
+Const AlgEC211DSA         = &HC4
+
+Rem  New signature algorithms for ZC8-series MultiApplication BasicCard
+Const AlgECpNR            = &HE1
+Const AlgECpDSA           = &HE2
+Const AlgRSAPSS           = &HE3
+Const AlgRSAPKCS1         = &HE4
+
+Rem  Hash algorithm to use with signature algorithms >= AlgEC167NR
+Rem  (for ZC8-series MultiApplication BasicCard only)
+Const AlgSigHashDefault   = &H00 ' SHA-1 with EC-167, otherwise SHA-256
+Const AlgSigHashSha1      = &H08
+Const AlgSigHashSha224    = &H0C
+Const AlgSigHashSha256    = &H10
+Const AlgSigHashSha384    = &H14
+Const AlgSigHashSha512    = &H18
+
+#EndIf ' AlgIdDefIncluded

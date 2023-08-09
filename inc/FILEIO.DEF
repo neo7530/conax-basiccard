@@ -1,0 +1,103 @@
+Rem BasicCard Sample Source Code
+Rem ------------------------------------------------------------------
+Rem Copyright (C) 1997-1999 ZeitControl GmbH
+Rem You have a royalty-free right to use, modify, reproduce and 
+Rem distribute the Sample Application Files (and/or any modified 
+Rem version) in any way you find useful, provided that you agree 
+Rem that ZeitControl GmbH has no warranty, obligations or liability
+Rem for any Sample Application Files.
+Rem ------------------------------------------------------------------
+
+Rem  FILEIO.DEF
+Rem
+Rem  Declarations for ZC-Basic File I/O
+
+#IfNotDef FileioDefIncluded ' Prevent multiple inclusion
+Const FileioDefIncluded = True
+
+#IfDef CompactBasicCard
+#Error File I/O is not suported in the Compact BasicCard!
+#EndIf
+
+Rem  FileError codes
+
+Const feFileOK              = 0
+Const feInvalidDrive        = 1
+Const feBadFilename         = 2
+Const feBadFilenum          = 3
+Const feFileNotFound        = 4
+Const feFileNotOpen         = 5
+Const feOpenError           = 6
+Const feSeekError           = 7
+Const feReadError           = 8
+Const feWriteError          = 9
+Const feCloseError          = 10
+Const feInvalidMode         = 11
+Const feInvalidAccess       = 12
+Const feRenameError         = 13
+Const feAccessDenied        = 14
+Const feSharingViolation    = 15
+Const feFileAlreadyExists   = 16
+Const feNotDataFile         = 17
+Const feNotDirectory        = 18
+Const feDirNotEmpty         = 19
+Const feBadFileChain        = 20
+Const feFileOpen            = 21
+Const feNameTooLong         = 22
+Const feRecordTooLong       = 23
+Const feTooManyOpenFiles    = 24
+Const feTooManyCardFiles    = 25
+Const feCommsError          = 26
+Const feRemoteFile          = 27
+Const feNotRemoteFile       = 28
+Const feRecursiveRename     = 29
+Const feInvalidFromKeyboard = 30
+Const feBadParameter        = 31
+Const feOutOfMemory         = 32
+Const feNoFileSystem        = 33
+Const feUnexpectedError     = 34
+Const feNotImplemented      = 35
+Const feTooManyCustomLocks  = 36
+Const feBadKeyFile          = 37
+Const feInvalidAlignment    = 38
+
+Rem  File Attribute bits
+
+Const faDirectory  = &H0010
+Const faCardFile   = &H0040
+
+#IfDef TerminalProgram
+
+Const faReadOnly   = &H0001
+Const faHiddenFile = &H0002
+Const faSystemFile = &H0004
+Const faArchived   = &H0020
+Const faNormal     = &H0080
+Const faTemporary  = &H0100
+
+#EndIf
+
+#IfNotDef MultiAppBasicCard
+
+Rem  LockInfo defined type, for GET LOCK statement
+
+Type LockInfo
+  ReadLock As Byte       ' liAllowed, liKeyed1, liKeyed2, or liForbidden
+  WriteLock As Byte      ' liAllowed, liKeyed1, liKeyed2, or liForbidden
+  CustomLock As Byte     ' liAllowed, liUnlocked, or liLocked
+  ReadKey1@, ReadKey2@   ' Key number(s) for ReadLock
+  WriteKey1@, WriteKey2@ ' Key number(s) for WriteLock
+End Type
+
+Rem  LockInfo constants
+
+Const liAllowed   = 0
+Const liKeyed1    = 1
+Const liKeyed2    = 2
+Const liForbidden = 3
+Const liUnlocked  = 1
+Const liLocked    = 2
+
+#EndIf ' MultiAppBasicCard
+
+#EndIf ' FileioDefIncluded
