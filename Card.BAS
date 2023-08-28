@@ -76,7 +76,7 @@ outbuffer = ""
 
 end command
 
-command &hDD &hC2 serial(data as string)
+command &hDD &hC2 getserial(data as string)
 outbuffer = ""
   if data = chr$(&h66,&h00) then
     outbuffer = chr$(&h74,&h04) + ppua
