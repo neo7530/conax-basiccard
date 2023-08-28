@@ -13,7 +13,8 @@ Option Explicit
 #EndIf
 
 #Pragma Allow9XXX
-declare binary atr = &h3b, &h34, &h94, &h00, &h30, &h42, &h30, &h30, &h1
+declare binary atr = &h3b, &h24, &h00, &h30, &h42, &h30, &h30, &h1
+'declare binary atr = &h3b, &h34, &h94, &h00, &h30, &h42, &h30, &h30, &h1
 'declare binary atr = &h3B, &h9F, &h21, &h0E, &h49, &h52, &h44, &h45, &h54, &h4F, &h20, &h41, &h43, &h53, &h20, &h56, &h36, &h2E, &h30, &h9E
 'declare binary atr = &h3F, &h77, &h18, &h25, &h00, &h29, &h14, &h00, &h62, &h68, &h90, &h00,1
 
@@ -75,10 +76,22 @@ outbuffer = ""
 
 end command
 
+command &hDD &hC2 serial(data as string)
+outbuffer = ""
+  if data = chr$(&h66,&h00) then
+    outbuffer = chr$(&h74,&h04) + ppua
+    sw1sw2 = &h9806
+  else
+    sw1sw2 = &h9000
+  end if
+end command
+
+
+
 command &hDD &h26 sendinfo(data as string)
   if data = chr$(&h10,&h01,&h40) then
-    outbuffer = chr$(&h20,&h01,&h40,&h28,&h02) + caid + chr$(&h2f,&h02,&h00,&h31,&h30,&h1)+ maturity + chr$(&h23,&h1,&h5)
-    sw1sw2 = &h9811
+    outbuffer = chr$(&h20,&h01,&h40,&h28,&h02) + caid + chr$(&h2f,&h02,&h00,&h31,&h30,&h1)+ maturity + chr$(&h23,&h1,&h5) 'CAS7
+    sw1sw2 = &h9811 'CAS7
   else if data = chr$(&h1C,&h01,&h00) then
     call proginfo
     sw1 = &h98
