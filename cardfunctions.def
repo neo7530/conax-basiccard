@@ -360,7 +360,7 @@ if check = cmac then
 
   next i
 
-  for i = 0 to 4
+  for i = 0 to 9
     if ServiceList(i).serviceid = idt then
       idok = 1
       accservice = ServiceList(i).acc 
