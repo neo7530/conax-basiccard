@@ -109,8 +109,10 @@ end function
 
 function cardinfo()
    private data$ as string
+   call getserial(chr$(&h66,&h00)) : call respond()
+   call getdata(LC=0,data$,LE=laenge) : Call CheckSW1SW2()
    call sendinfo(chr$(&h69,1,0)) : call respond()
-   call sendinfo(chr$(&h10,1,&h40)) : call respond()
+   call sendinfo(chr$(&h10,1,&h40,&h69, &h01 ,&h00)) : call respond()
    call getdata(LC=0,data$,LE=laenge) : Call CheckSW1SW2()
    Call programminfo(chr$(&h1C,1,0,1)) : Call respond()
    call getdata(LC=0,data$,LE=laenge) : Call respond() '31

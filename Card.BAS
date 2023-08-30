@@ -89,7 +89,7 @@ end command
 
 
 command &hDD &h26 sendinfo(data as string)
-  if data = chr$(&h10,&h01,&h40) then
+  if (data(1) = chr$(&h10) and data(2)= chr$(&h01) and data(3) = chr$(&h40)) then
     outbuffer = chr$(&h20,&h01,&h40,&h28,&h02) + caid + chr$(&h2f,&h02,&h00,&h31,&h30,&h1)+ maturity + chr$(&h23,&h1,&h5) 'CAS7
     sw1sw2 = &h9811 'CAS7
   else if data = chr$(&h1C,&h01,&h00) then
@@ -108,7 +108,7 @@ end command
 command &hDD &h82 get82(data as string*50)
   if lc = &h11 or lc = &h14 then
     outbuffer = chr$(&h22, &h18, &h09, &h04) +_
-    data(4)+ data(5) + data(6) + data(7) + chr$(&h23, &h07, &h00, &h00, &h00) +_
+    caid + data(6) + data(7) + chr$(&h23, &h07, &h00, &h00, &h00) +_
     ppua + chr$(&h23, &h07, &h00, &h00, &h00) + ppsa
     sw1sw2 = &h981A
   else

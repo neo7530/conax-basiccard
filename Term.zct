@@ -15,11 +15,11 @@ MapFile=false
 SourceFile=Term.bas
 
 [Console Window]
-Bottom=1046
-Left=1612
-Right=2278
+Bottom=1009
+Left=33
+Right=699
 ShowCmd=1
-Top=590
+Top=553
 
 [FreeMem Window]
 Block0=&quote;=my,fAB7L,_jjgu_+=LR*{`;J;ng1.|J&gt;a=00}.rPbME^Sh&amp;a}P`G_M
@@ -33,8 +33,8 @@ ComPort=201
 SaveEEPROM=false
 
 [Window Geometry]
-Block0=&quote;=my,fAB7L,_lR@.s0;2z;{jP7D@mz5s&apos;k},X@BRO6[g&quote;y,meuu4#dT;
-CRC=0xc1b0404c
+Block0=&quote;=my,fAB7L,_jn,JVO9:a{d/[f[kk#rO*0@o=AC[|62y,ymR\z&quote;,xi;]
+CRC=0xa6a08ffa
 Length=46
 
 [Window Options]

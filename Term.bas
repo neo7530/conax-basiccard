@@ -55,20 +55,20 @@ call cardinfo
 serial = 80000000
 group = 999999
 shastring = "das ist ein langer test"
-call initcard(shastring,ppua,ppsa)
+'call initcard(shastring,ppua,ppsa)
 
 '########################## CREATE PROVIDER ##########################
 serviceid = chr$(&h10,&h10)
 servicename = "NeoVision"
-call createprovider(ppua,serviceid,bos,eos,servicename,acc,ppsa)
+'call createprovider(ppua,serviceid,bos,eos,servicename,acc,ppsa)
 
 '########################## CREATE 2nd PROVIDER ##########################
 serviceid = chr$(&h10,&h1F)
 servicename = "TESLA-1"
-call createprovider(ppua,serviceid,bos,eos,servicename,acc,ppsa)
+'call createprovider(ppua,serviceid,bos,eos,servicename,acc,ppsa)
 
 '########################## UPDATE KEYS VIA SHARED EMM ##########################
-call keyupdate(ppsa)
+'call keyupdate(ppsa)
 
 '########################## GENARATE EMM ##########################
 cw1 = chr$(&h11,&h12,&h13,&h14,&h15,&h16,&h17,&h18)
@@ -76,5 +76,5 @@ cw0 = chr$(&h01,&h02,&h03,&h04,&h05,&h06,&h07,&h08)
 call conaxdatum(2020,9,10,result)
 acc = chr$(0,0,0,2)
 
-call emmg(&h20,conaxdate,cw1,cw0,serviceid,acc)
+'call emmg(&h20,conaxdate,cw1,cw0,serviceid,acc)
 
