@@ -106,9 +106,9 @@ command &hDD &h26 sendinfo(data as string)
 end command
 
 command &hDD &h82 get82(data as string*50)
-  if lc = &h11 or lc = &h14 then
+  if lc = &h11 or lc = &h14 or lc = &h15 then
     outbuffer = chr$(&h22, &h18, &h09, &h04) +_
-    caid + data(6) + data(7) + chr$(&h23, &h07, &h00, &h00, &h00) +_
+    caid + data(15) + data(16) + chr$(&h23, &h07, &h00, &h00, &h00) +_
     ppua + chr$(&h23, &h07, &h00, &h00, &h00) + ppsa
     sw1sw2 = &h981A
   else
