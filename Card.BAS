@@ -53,7 +53,7 @@ eeprom ppua as string*4
 eeprom ppsa as string*4
 eeprom maturity as string*1 = &h01
 eeprom pincode as string*4 = &h31,&h32,&h33,&h34
-eeprom caid as string*2 = &h0b,&h02
+eeprom caid as string*2 = &h0b,&h00
 
 #include cardfunctions.def
 
@@ -90,8 +90,10 @@ end command
 
 command &hDD &h26 sendinfo(data as string)
   if (data(1) = chr$(&h10) and data(2)= chr$(&h01) and data(3) = chr$(&h40)) then
-    outbuffer = chr$(&h20,&h01,&h40,&h28,&h02) + caid + chr$(&h2f,&h02,&h00,&h31,&h30,&h1)+ maturity + chr$(&h23,&h1,&h5) 'CAS7
-    sw1sw2 = &h9811 'CAS7
+    outbuffer = chr$(&h20, &h01, &h01, &h28, &h02) + caid + chr$(&h2F, &h02, &h00, &h31, &h30, &h1) + maturity 'CAS3
+    sw1sw2 = &h980e 'CAS3
+    'outbuffer = chr$(&h20,&h01,&h40,&h28,&h02) + caid + chr$(&h2f,&h02,&h00,&h31,&h30,&h1)+ maturity + chr$(&h23,&h1,&h5) 'CAS7
+    'sw1sw2 = &h9811 'CAS7
   else if data = chr$(&h1C,&h01,&h00) then
     call proginfo
     sw1 = &h98

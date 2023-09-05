@@ -265,6 +265,7 @@ if pp = ppua and pp = ppuatest then
     if updateppsa = 1 and ppsatest <> ppsa then
       ppsa = ppsatest
       key(&h11) = omac(128,key(1),ppsa)
+      sw1sw2 = &h9011
     end if
     servicelist(zeroidx).acc = acctest
     servicelist(zeroidx).bos = starttest
