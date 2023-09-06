@@ -1,9 +1,0 @@
-[Window Options]
-IOToolTipEnabled=true
-ShowRegisters=Auto
-
-[ZCC]
-0=[ ]card.zcc
-
-[ZCT]
-0=[ ]Term.zct
