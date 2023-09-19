@@ -12,6 +12,6 @@ put it in your CI and do an onboarding within CAS-System
 
 Update 20230919:
 
-switch added for 64-Bit/48-Bit CW via access-criteria via lowest bit (bit 0)
+switch added for 64-Bit/48-Bit CW via access-criteria via highest bit (bit 31)
 -	--access-criteria 00000001 = 48-Bit CW (reduced entropy)
 -	--access-criteria 80000001 = 64-Bit CW (full entropy) (works mostly on softcam, real CI automaticly reduces the entropy to 48-Bit)
